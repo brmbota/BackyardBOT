@@ -1,0 +1,15 @@
+{
+  "name": "backyardbot",
+  "version": "1.0.0",
+  "description": "Bot za discord server Backyard",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index"
+  },
+  "author": "Milorad Brmbota",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "dotenv": "^10.0.0"
+  }
+}
