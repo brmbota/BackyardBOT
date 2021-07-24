@@ -1,6 +1,7 @@
 const Discord = require("discord.js");  //ucitavanje discord.js biblioteka
 const fs = require("fs");
 const dotenv = require('dotenv');       //ucitavanje biblioteke za secure store
+const { name } = require("./commands/reactionrole");
 dotenv.config();                        //tokena i ostalih vrednosti in future
 
 const bot = new Discord.Client({partials:["MESSAGE","CHANNEL","REACTION"]});
@@ -12,9 +13,9 @@ bot.once('ready', () => {                       //obavestenje u konzoli da se bo
 
 bot.commands = new Discord.Collection();        //pravljenje kolekcija komandi
 
-const commandFiles = fs.readdirSync('./commands').filter(file=>{file.endsWith(".js")}); //filtriranje samo .js fajlova
+const commandFiles = fs.readdirSync('./commands/').filter(file=>file.endsWith(".js")); //filtriranje samo .js fajlova
 for (const file of commandFiles){
-    const command = require(`./commands${file}`);
+    const command = require(`./commands/${file}`);
 
     bot.commands.set(command.name, command);   //property objekat.name=naziv komande
 }
@@ -58,6 +59,7 @@ bot.on("message", message => {
             break;
         case `reactionrole`:
                 bot.commands.get("reactionrole").execute(message, args, Discord, bot);
+                // console.log(bot.commands.get(name));
             break;
     }
 
