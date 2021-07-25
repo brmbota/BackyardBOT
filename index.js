@@ -30,7 +30,7 @@ bot.on("message", message => {
 
     switch (args[0]) {
         case `joke`:                                       //komanda -joke - govori glup vic
-            bot.commands.get("joke").execute();
+            bot.commands.get("joke").execute(message,args);
             break;
         case `info`:                                       //komanda info
             bot.commands.get("info").execute(message, args, version);
