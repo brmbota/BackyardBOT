@@ -2,23 +2,35 @@ module.exports = {
     name: "reactionrole",
     description: "Reaction role komanda!",
     async execute(message, args, Discord, bot) {
-        const channel = "868474980365664296";             //id od get-roles channela
-        const blueRole = message.guild.roles.cache.find(role => role.name === "blue role");
-        const redRole = message.guild.roles.cache.find(role => role.name === "red role");
-
-        const blueEmoji = "🤠";
-        const redEmoji = "😋";
+        ////////////////////////////////////////////////
+        const channel = "868835687963705364";  //id od get-roles channela 
+        /////////////////////////////////////////////////
+        const backyardRole = message.guild.roles.cache.find(role => role.name === "Backyard");
+        const graveRole = message.guild.roles.cache.find(role => role.name === "Graveyard");
+        const mcRole = message.guild.roles.cache.find(role => role.name === "Minecraft gang");
+        const amongRole = message.guild.roles.cache.find(role => role.name === "Among us gang");
+      
+        const backyardEmoji = "🌝";
+        const graveEmoji = "🌚";
+        const mcEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'steve');
+        const amongEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'amonglove');
 
         let embed = new Discord.MessageEmbed()
             .setColor("#e42643")
             .setTitle("Izaberi role za igrice koje igras!")
-            .setDescription(`Odabirom rola ce ti dozvoliti da otkljucas posebne channele bas za te igrice! \n\n'
-            ${blueEmoji} za plavi tim\n
-            ${redEmoji} za crveni tim`);
+            .setDescription(`Odabirom rola ce ljudi znati koji ti je stil igre! \n\n
+            ${backyardEmoji} - Backyard : chill & casual\n
+            ${graveEmoji} - Graveyard : evil & edgy\n\n
+            Odabirom rola ce ti dozvoliti da otkljucas posebne channele bas za te igrice!\n\n
+            ${mcEmoji} - Minecraft\n
+            ${amongEmoji} - Among us
+            `);
 
         let messageEmbed = await message.channel.send(embed);
-        messageEmbed.react(blueEmoji);
-        messageEmbed.react(redEmoji);
+        messageEmbed.react(backyardEmoji);
+        messageEmbed.react(graveEmoji);
+        messageEmbed.react(mcEmoji);
+        messageEmbed.react(amongEmoji);
 
         bot.on("messageReactionAdd", async (reaction, user) => {            //ko god reaguje na ovo ulazi u ovaj event
             if (reaction.message.partial) await reaction.message.fetch();
@@ -27,11 +39,18 @@ module.exports = {
             if (!reaction.message.guild) return;
 
             if (reaction.message.channel.id == channel) {                   //ako nije ovo postavljeno bot ce gledati po celom srw
-                if (reaction.emoji.name === blueEmoji) {
-                    await reaction.message.guild.members.cache.get(user.id).roles.add(blueRole);
+                console.log(reaction.emoji.name);
+                if (reaction.emoji.name === backyardEmoji) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.add(backyardRole);
                 }
-                if (reaction.emoji.name === redEmoji) {
-                    await reaction.message.guild.members.cache.get(user.id).roles.add(redRole);
+                if (reaction.emoji.name === graveEmoji) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.add(graveRole);
+                }
+                if (reaction.emoji.id === mcEmoji.id) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.add(mcRole);
+                }
+                if (reaction.emoji.id === amongEmoji.id) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.add(amongRole);
                 }
             } else {
                 return;
@@ -46,11 +65,17 @@ module.exports = {
             if (!reaction.message.guild) return;
 
             if (reaction.message.channel.id == channel) {                   //ako nije ovo postavljeno bot ce gledati po celom srw
-                if (reaction.emoji.name === blueEmoji) {
-                    await reaction.message.guild.members.cache.get(user.id).roles.remove(blueRole);
+                if (reaction.emoji.name === backyardEmoji) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.remove(backyardRole);
                 }
-                if (reaction.emoji.name === redEmoji) {
-                    await reaction.message.guild.members.cache.get(user.id).roles.remove(redRole);
+                if (reaction.emoji.name === graveEmoji) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.remove(graveRole);
+                }
+                if (reaction.emoji.id === mcEmoji.id) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.remove(mcRole);
+                }
+                if (reaction.emoji.id === amongEmoji.id) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.remove(amongRole);
                 }
             } else {
                 return;
