@@ -1,7 +1,7 @@
 # BackyardBOT
 Discord bot for private server
 
-# Komande
+## Komande
     
     !roles-izlistava u konzoli sve rolove koji postoje na serveru
 
