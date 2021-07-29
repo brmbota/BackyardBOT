@@ -20,7 +20,6 @@ for (const file of commandFiles) {
     bot.commands.set(command.name, command);   //property objekat.name=naziv komande
 }
 
-
 const PREFIX = process.env.prefix;             //kupljenje prefixa za komande
 let version = process.env.version;             //kupljenje inforamcije trenutne verzije bota
 
@@ -30,17 +29,26 @@ bot.on("message", message => {
 
     switch (args[0]) {
         case `joke`:                                       //komanda -joke - govori glup vic
-            bot.commands.get("joke").execute(message,args);
+            bot.commands.get("joke").execute(message, args);
             break;
         case `info`:                                       //komanda info
             bot.commands.get("info").execute(message, args, version);
             break;
         case `clear`:                                      //komanda -clear [arg-MAX=>100] - brise predhodnih [arg] poruka //primer:!clear 90 
-            bot.commands.get("clear").execute(message,args)    
+            bot.commands.get("clear").execute(message, args)
             break;
         case `reactionrole`:                               //komanda -reactionrole - pravi embed poruku i omogucava reaction role
             bot.commands.get("reactionrole").execute(message, args, Discord, bot);
             break;
     }
+
+});
+
+bot.on("guildMemberAdd", guildMember => {
+    //let WelcomeRole= gildMember.guild.roles.cache.find(role => role.name === "member"); //will be used in future when the server is set
+    //guildMember.roles.add(WelcomeRole);
+
+    guildMember.guild.channels.cache.get("775662408982593539")
+        .send(`Dobrodosao <@${guildMember.user.id}> na Backyard server! Poseti #get-roles kanal kako bi otkljucao druge kanale!`); //INSERT HERE CHANNEL ID FOR WELCOME MSG
 
 });
