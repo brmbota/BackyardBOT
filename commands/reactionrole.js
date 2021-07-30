@@ -3,17 +3,21 @@ module.exports = {
     description: "Reaction role komanda!",
     async execute(message, args, Discord, bot) {
         ////////////////////////////////////////////////
-        const channel = "868835687963705364";  //id od get-roles channela 
+        const channel = "870701496709283930";  //id od get-roles channela 
         /////////////////////////////////////////////////
         const backyardRole = message.guild.roles.cache.find(role => role.name === "Backyard");
         const graveRole = message.guild.roles.cache.find(role => role.name === "Graveyard");
         const mcRole = message.guild.roles.cache.find(role => role.name === "Minecraft gang");
         const amongRole = message.guild.roles.cache.find(role => role.name === "Among us gang");
+        const lolRole = message.guild.roles.cache.find(role => role.name === "lol gang");
+        const csRole = message.guild.roles.cache.find(role => role.name === "CS gang");
       
         const backyardEmoji = "🌝";
         const graveEmoji = "🌚";
         const mcEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'steve');
         const amongEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'amonglove');
+        const lolEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'aquacry');
+        const csEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'hratatata');
 
         let embed = new Discord.MessageEmbed()
             .setColor("#e42643")
@@ -23,7 +27,9 @@ module.exports = {
             ${graveEmoji} - Graveyard : evil & edgy\n\n
             Odabirom rola ce ti dozvoliti da otkljucas posebne channele bas za te igrice!\n\n
             ${mcEmoji} - Minecraft\n
-            ${amongEmoji} - Among us
+            ${amongEmoji} - Among us\n
+            ${lolEmoji} - League of Legends\n
+            ${csEmoji} - Counter Strike
             `);
 
         let messageEmbed = await message.channel.send(embed);
@@ -31,6 +37,8 @@ module.exports = {
         messageEmbed.react(graveEmoji);
         messageEmbed.react(mcEmoji);
         messageEmbed.react(amongEmoji);
+        messageEmbed.react(lolEmoji);
+        messageEmbed.react(csEmoji);
 
         bot.on("messageReactionAdd", async (reaction, user) => {            //ko god reaguje na ovo ulazi u ovaj event
             if (reaction.message.partial) await reaction.message.fetch();
@@ -51,6 +59,12 @@ module.exports = {
                 }
                 if (reaction.emoji.id === amongEmoji.id) {
                     await reaction.message.guild.members.cache.get(user.id).roles.add(amongRole);
+                }
+                if (reaction.emoji.id === lolEmoji.id) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.add(lolRole);
+                }
+                if (reaction.emoji.id === csEmoji.id) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.add(csRole);
                 }
             } else {
                 return;
@@ -76,6 +90,12 @@ module.exports = {
                 }
                 if (reaction.emoji.id === amongEmoji.id) {
                     await reaction.message.guild.members.cache.get(user.id).roles.remove(amongRole);
+                }
+                if (reaction.emoji.id === lolEmoji.id) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.remove(lolRole);
+                }
+                if (reaction.emoji.id === csEmoji.id) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.remove(csRole);
                 }
             } else {
                 return;

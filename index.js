@@ -45,10 +45,10 @@ bot.on("message", message => {
 });
 
 bot.on("guildMemberAdd", guildMember => {
-    //let WelcomeRole= gildMember.guild.roles.cache.find(role => role.name === "member"); //will be used in future when the server is set
-    //guildMember.roles.add(WelcomeRole);
+    let WelcomeRole= guildMember.guild.roles.cache.find(role => role.name === "ServerMember"); //will be used in future when the server is set
+    guildMember.roles.add(WelcomeRole);
 
-    guildMember.guild.channels.cache.get("775662408982593539")
-        .send(`Dobrodosao <@${guildMember.user.id}> na Backyard server! Poseti #get-roles kanal kako bi otkljucao druge kanale!`); //INSERT HERE CHANNEL ID FOR WELCOME MSG
+    await guildMember.guild.channels.cache.get("775662408982593539")
+        .send(`Dobrodosao <@${guildMember.user.id}> na Backyard server! Poseti #welcome kanal kako bi otkljucao druge kanale!`); //INSERT HERE CHANNEL ID FOR WELCOME MSG
 
 });
