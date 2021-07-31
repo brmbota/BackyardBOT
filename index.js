@@ -48,7 +48,7 @@ bot.on("guildMemberAdd", guildMember => {
     let WelcomeRole= guildMember.guild.roles.cache.find(role => role.name === "ServerMember"); //will be used in future when the server is set
     guildMember.roles.add(WelcomeRole);
 
-    await guildMember.guild.channels.cache.get("775662408982593539")
+    guildMember.guild.channels.cache.get("775662408982593539")
         .send(`Dobrodosao <@${guildMember.user.id}> na Backyard server! Poseti #welcome kanal kako bi otkljucao druge kanale!`); //INSERT HERE CHANNEL ID FOR WELCOME MSG
 
 });
