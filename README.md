@@ -6,10 +6,12 @@ Discord bot for private server
 !roles-izlistava u konzoli sve rolove koji postoje na serveru
 
 !joke-govori glup vic, fun EasterEgg
+
 ![joke](https://user-images.githubusercontent.com/86261676/128500712-1c062059-6a76-4c67-8c01-1c9a8afa6150.png)
     
 !info [argument]
 !info version-govori trenutnu verziju bota
+
 ![info-version](https://user-images.githubusercontent.com/86261676/128500685-47159f11-e1e4-44dd-837a-98af9f80db23.png)
     
 !clear [broj redova]-bulk delete predhodnih poruka ciji broj se definise argumentom
