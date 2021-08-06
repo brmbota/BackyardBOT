@@ -6,6 +6,7 @@ Discord bot for private server
 -roles-izlistava u konzoli sve rolove koji postoje na serveru
 
 -joke-govori glup vic, fun EasterEgg
+<Koristi JokesAPI koji mozete videti na: https://github.com/brmbota/JokesAPI
 
 ![joke](https://user-images.githubusercontent.com/86261676/128500712-1c062059-6a76-4c67-8c01-1c9a8afa6150.png)
     
@@ -19,3 +20,12 @@ Discord bot for private server
     
 -reactionrole-izbacuje embed message na koji bilo ko reaguje i dobija/skida rolove na serveru
 ![reactionrole](https://user-images.githubusercontent.com/86261676/128500724-52c541ef-5525-4265-bcfa-ea63c65e2986.png)
+
+## Future upgrades
+1. Announcement command
+2. Music commands
+3. Event creation and reminder commands
+
+
+## Licensing
+This project is licensed under Unlicense license. This license does not require you to take the license with you to your project.
