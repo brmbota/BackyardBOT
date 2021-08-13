@@ -49,10 +49,16 @@ module.exports = {
             if (reaction.message.channel.id == channel) {                   //ako nije ovo postavljeno bot ce gledati po celom srw
                 console.log(reaction.emoji.name);
                 if (reaction.emoji.name === backyardEmoji) {
-                    await reaction.message.guild.members.cache.get(user.id).roles.add(backyardRole);
+                    await reaction.message.guild.members.cache.get(user.id).roles.add(backyardRole);    //skida se suprotni jer je planirano
+                    await reaction.message.guild.members.cache.get(user.id).roles.remove(graveRole);    //samo ili backyard ili graveyard
+                    const msg = await reaction.message.channel.messages.fetch("870706582898491392");    //uzimamo objekat poruke za reaction
+                    msg.reactions.resolve(graveEmoji).users.remove(user.id);                            //dolazimo do kolekcije emojija
                 }
                 if (reaction.emoji.name === graveEmoji) {
                     await reaction.message.guild.members.cache.get(user.id).roles.add(graveRole);
+                    await reaction.message.guild.members.cache.get(user.id).roles.remove(backyardRole);
+                    const msg = await reaction.message.channel.messages.fetch("870706582898491392");
+                    msg.reactions.resolve(backyardEmoji).users.remove(user.id);
                 }
                 if (reaction.emoji.id === mcEmoji.id) {
                     await reaction.message.guild.members.cache.get(user.id).roles.add(mcRole);

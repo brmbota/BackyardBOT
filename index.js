@@ -7,10 +7,6 @@ dotenv.config();                        //tokena i ostalih vrednosti in future
 const bot = new Discord.Client({ partials: ["MESSAGE", "CHANNEL", "REACTION"] });
 bot.login(process.env.TOKEN);
 
-bot.once('ready', () => {                       //obavestenje u konzoli da se bot uspesno digao
-    console.log('BackyardBot je online!');
-});
-
 bot.commands = new Discord.Collection();        //pravljenje kolekcija komandi
 
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith(".js")); //filtriranje samo .js fajlova
@@ -19,6 +15,14 @@ for (const file of commandFiles) {
 
     bot.commands.set(command.name, command);   //property objekat.name=naziv komande
 }
+
+bot.once('ready', () => {                       //obavestenje u konzoli da se bot uspesno digao
+    console.log('BackyardBot je online!');
+    bot.channels.cache.get("868835687963705364")
+        .send("-reactionrole");                                           
+});
+
+
 
 const PREFIX = process.env.prefix;             //kupljenje prefixa za komande
 let version = process.env.version;             //kupljenje inforamcije trenutne verzije bota
@@ -39,6 +43,9 @@ bot.on("message", message => {
             break;
         case `reactionrole`:                               //komanda -reactionrole - pravi embed poruku i omogucava reaction role
             bot.commands.get("reactionrole").execute(message, args, Discord, bot);
+            break;
+        case `among`:
+            bot.commands.get("among").execute(message, args, Discord, bot);
             break;
     }
 
