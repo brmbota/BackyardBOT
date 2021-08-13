@@ -37,7 +37,7 @@ When time comes, notify message looks like this:
 ## Future upgrades
 1. Announcement command
 2. Music commands
-3. Event creation and reminder commands
+3. Event creation and reminder commands ✅
 
 
 ## Licensing
