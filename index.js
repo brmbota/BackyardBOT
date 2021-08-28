@@ -47,6 +47,9 @@ bot.on("message", message => {
         case `among`:
             bot.commands.get("among").execute(message, args, Discord, bot);
             break;
+        case `help`:
+            bot.commands.get("help").execute(message, args)
+            break;
     }
 
 });

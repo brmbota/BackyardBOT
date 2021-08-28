@@ -29,10 +29,10 @@ module.exports = {
         let messageEmbed = await bot.channels.cache.get("777621751781523486").send(embed);
         messageEmbed.react(reactEmoji);
 
-        let arr=args[1].split(":");
+        let arr = args[1].split(":");
         let trVremeH = new Date().getHours() * 60 * 60 * 1000;
-        let trVremeM = new Date().getMinutes() * 60 * 1000;
-        let novoVreme=(parseInt(arr[0])*60*60*1000+parseInt(arr[1])*60*1000-parseInt(args[2])*60*1000-trVremeH-trVremeM);
+        let trVremeM = new Date().getMinutes() * 60 * 1000;         //promeni na UTC zbog zavisnosti gde se srw nalazi i razlike u vremenu
+        let novoVreme = (parseInt(arr[0]) * 60 * 60 * 1000 + parseInt(arr[1]) * 60 * 1000 - parseInt(args[2]) * 60 * 1000 - trVremeH - trVremeM);
         console.log(novoVreme);
         console.log(new Date(novoVreme));
 
@@ -50,8 +50,27 @@ module.exports = {
             if (!reaction.message.guild) return;
 
             if (reaction.message.channel.id == channel) {
-                reminder += `<@${user.id}> `;
+                if (reaction.message.id == messageEmbed.id) {
+                    if (reaction.emoji.name == "👍") {
+                        reminder += `<@${user.id}> `;
+                    }
+                }
+            }
+        });
+        bot.on("messageReactionRemove", async (reaction, user) => {            //ko god reaguje na ovo ulazi u ovaj event
+            if (reaction.message.partial) await reaction.message.fetch();
+            if (reaction.partial) await reaction.fetch();
+            if (user.bot) return;                                           //posto bot reaguje takodje, da se njemu nista ne modifikuje
+            if (!reaction.message.guild) return;
+
+            if (reaction.message.channel.id == channel) {
+                if (reaction.message.id == messageEmbed.id) {
+                    if (reaction.emoji.name == "👍") {
+                        reminder = reminder.replace(`<@${user.id}>`,"");
+                    }
+                }
             }
         });
     }
-}
+    }
+    
