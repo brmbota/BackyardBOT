@@ -21,6 +21,9 @@ module.exports = {
                 let dataJSON = JSON.parse(data);
                 message.channel.send(dataJSON.question);
                 message.channel.send(dataJSON.answer);
+                if (dataJSON.error) {
+                    message.channel.send(dataJSON.error);
+                }
             });
         }).on("error", (err) => {
             console.log("Error: " + err.message);
