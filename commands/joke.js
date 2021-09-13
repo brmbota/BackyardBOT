@@ -3,8 +3,14 @@ module.exports = {
     description: "Tells a joke",
     async execute(message, args) {
         const http = require("http");
-
-        http.get("http://bh003.bluefoxhost.com:4047/vic/random", (reply) => {
+        let conn="";
+        if (args[1] && !isNaN(args[1])) {
+            conn=`http://bh003.bluefoxhost.com:4047/vic/${args[1]}`;
+        }else{
+            conn="http://bh003.bluefoxhost.com:4047/vic/random";
+        }
+    
+        http.get(conn, (reply) => {
             let data = "";
 
             reply.on('data', (chunk) => {
