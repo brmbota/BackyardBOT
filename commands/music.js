@@ -15,7 +15,10 @@ module.exports = {
         console.log(args[1]);
         const basa = "294468077331152896";
         const voice_channel = message.member.voice.channel;
-        if (message.author.id == basa) return message.channel.send("Baso, zar stvarno mislis da bi ti dozvolili da pustas muziku lol");
+        // if (message.author.id == basa) return message.channel.send("Baso, zar stvarno mislis da bi ti dozvolili da pustas muziku lol");
+        if(message.author.id==basa) {
+            message.channel.send("Baso pazi sta radis");
+        }
         if (!voice_channel) return message.channel.send("Moras biti u voice chatu da bi koristio ovu komandu!");
 
         const permissions = voice_channel.permissionsFor(message.client.user);
@@ -32,20 +35,20 @@ module.exports = {
             if (ytdl.validateURL(args[2])) {
                 const song_info = await ytdl.getInfo(args[2]);
                 song = { title: song_info.videoDetails.title, url: song_info.videoDetails.video_url }
+            
+            } else {
+                //If there was no link, we use keywords to search for a video. Set the song object to have two keys. Title and URl.
+                const video_finder = async (query) => {
+                    const video_result = await ytSearch(query);
+                    return (video_result.videos.length > 1) ? video_result.videos[0] : null;
+                }
+                const video = await video_finder(args.join(' ').replace("music play", ""));
+                if (video) {
+                    song = { title: video.title, url: video.url }
+                } else {
+                    message.channel.send('Error finding video.');
+                }
             }
-            // } else {
-            //     //If there was no link, we use keywords to search for a video. Set the song object to have two keys. Title and URl.
-            //     const video_finder = async (query) => {
-            //         const video_result = await ytSearch(query);
-            //         return (video_result.videos.length > 1) ? video_result.videos[0] : null;
-            //     }
-            //     const video = await video_finder(args.join(' ').replace("music play", ""));
-            //     if (video) {
-            //         song = { title: video.title, url: video.url }
-            //     } else {
-            //         message.channel.send('Error finding video.');
-            //     }
-            // }
             //If the server queue does not exist (which doesn't for the first video queued) then create a constructor to be added to our global queue.
             if (!server_queue) {
 
