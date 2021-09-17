@@ -5,11 +5,13 @@ Discord bot for private server
     
 -roles-izlistava u konzoli sve rolove koji postoje na serveru
 
--joke-govori glup vic, fun EasterEgg
+-joke-govori glup random vic, fun EasterEgg
 <Koristi JokesAPI koji mozete videti na: https://github.com/brmbota/JokesAPI
 
 ![joke](https://user-images.githubusercontent.com/86261676/128500712-1c062059-6a76-4c67-8c01-1c9a8afa6150.png)
-    
+ 
+-joke [broj] koristi API kako bi uzeo tacan vic, ukoliko argument nije broj, daje se random vic, ukoliko je broj veci od maksimuma, daje se povratna poruka sa informacijom koji je maksimalan broj koji argument moze iznositi. 
+ 
 -info [argument]
 -info version-govori trenutnu verziju bota
 
