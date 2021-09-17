@@ -35,10 +35,16 @@ When time comes, notify message looks like this:
 
 ![among3](https://user-images.githubusercontent.com/86261676/129413562-2394d7e6-c0b9-4c76-a3ad-d3bb3a3c5310.png)
 
+-music [komanda]
+    -music play [link pesme]
+    -music play [naziv pesme]
+    -music skip - pustanje sledece pesme u redu
+    -music stop - bot se ikljucuje sa voice poziva i gasi pustanje muzike
+
 
 ## Future upgrades
 1. Announcement command
-2. Music commands
+2. Music commands ✅
 3. Event creation and reminder commands ✅
 
 
