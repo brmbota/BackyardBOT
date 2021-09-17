@@ -50,6 +50,9 @@ bot.on("message", message => {
         case `help`:
             bot.commands.get("help").execute(message, args)
             break;
+        case `music`:
+            bot.commands.get("music").execute(message, args, Discord, bot);
+            break;
     }
 
 });
