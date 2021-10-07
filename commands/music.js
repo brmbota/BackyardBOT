@@ -43,7 +43,7 @@ module.exports = {
                     return (video_result.videos.length > 1) ? video_result.videos[0] : null;
                 }
                 const video = await video_finder(args.join(' ').replace("music play", ""))
-                .catch(err=>console.log("doslo je do greske: ",err));
+                    .catch(err => console.log("doslo je do greske: ", err));
                 if (video) {
                     song = { title: video.title, url: video.url }
                 } else {
@@ -111,14 +111,22 @@ const video_player = async (guild, song) => {
 
 const skip_song = (message, server_queue) => {
     if (!message.member.voice.channel) return message.channel.send('Moras biti u kanalu kako bi pokrenuo ovu komandu!');
-    if (!server_queue.songs) {
+    if (!server_queue) {
         return message.channel.send(`Nema vise pesama u redu 😔`);
     }
-    server_queue.connection.dispatcher.end();
+    try {
+        server_queue.connection.dispatcher.end();
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 const stop_song = (message, server_queue) => {
     if (!message.member.voice.channel) return message.channel.send('Moras biti u kanalu kako bi pokrenuo ovu komandu!');
     server_queue.songs = [];
-    server_queue.connection.dispatcher.end();
+    try {
+        server_queue.connection.dispatcher.end();
+    } catch (err) {
+        console.log(err)
+    }
 }
