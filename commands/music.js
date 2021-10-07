@@ -111,7 +111,7 @@ const video_player = async (guild, song) => {
 
 const skip_song = (message, server_queue) => {
     if (!message.member.voice.channel) return message.channel.send('Moras biti u kanalu kako bi pokrenuo ovu komandu!');
-    if (!server_queue) {
+    if (server_queue.songs.length==1) {
         return message.channel.send(`Nema vise pesama u redu 😔`);
     }
     try {
