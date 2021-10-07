@@ -102,7 +102,7 @@ const video_player = async (guild, song) => {
         await song_queue.text_channel.send(`🎶 Sada se pusta **${song.title}**`)
     }
     catch (err) {
-        message.channel.send('Imam neke probleme!');
+        console.log('Imam neke probleme!');
         throw err;
     }
 
@@ -110,7 +110,7 @@ const video_player = async (guild, song) => {
 
 const skip_song = (message, server_queue) => {
     if (!message.member.voice.channel) return message.channel.send('Moras biti u kanalu kako bi pokrenuo ovu komandu!');
-    if (!server_queue) {
+    if (!server_queue.songs) {
         return message.channel.send(`Nema vise pesama u redu 😔`);
     }
     server_queue.connection.dispatcher.end();
