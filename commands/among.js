@@ -32,7 +32,7 @@ module.exports = {
         let arr = args[1].split(":");
         let trVremeH = new Date().getHours() * 60 * 60 * 1000;
         let trVremeM = new Date().getMinutes() * 60 * 1000;         //promeni na UTC zbog zavisnosti gde se srw nalazi i razlike u vremenu
-        let novoVreme = (parseInt(arr[0]) * 60 * 60 * 1000 + parseInt(arr[1]) * 60 * 1000 - parseInt(args[2]) * 60 * 1000 - trVremeH - trVremeM);
+        let novoVreme = (parseInt(arr[0]) * 60 * 60 * 1000 + parseInt(arr[1]) * 60 * 1000 - parseInt(args[2]) * 60 * 1000 - trVremeH - trVremeM - 2*60*60*1000);
         console.log(novoVreme);
         console.log(new Date(novoVreme));
 
