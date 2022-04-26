@@ -117,13 +117,14 @@ const video_player = async (guild, song) => {
 
 const skip_song = (message, server_queue) => {
     if (!message.member.voice.channel) return message.channel.send('Moras biti u kanalu kako bi pokrenuo ovu komandu!');
-    if (server_queue.songs.length == 1) {
+    if (server_queue.songs.length == 1 || !server_queue || server_queue.songs.length == 0) {
         return message.channel.send(`Nema vise pesama u redu 😔`);
     }
     try {
         server_queue.connection.dispatcher.end();
     } catch (err) {
         console.log(err)
+        message.channel.send("Desio se sledeci error: ", err)
     }
 }
 
