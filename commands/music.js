@@ -1,6 +1,7 @@
 const ytdl = require("ytdl-core");
 const ytSearch = require("yt-search");
-
+let lastMemberPlayed = "";
+let messageChannel;
 const queue = new Map();
 //queue(message.guild.id,queue_contructor object {voice channel, text channel,  connection, song[]});
 //-music play [link]
@@ -15,6 +16,8 @@ module.exports = {
         console.log(args[1]);
         const basa = "294468077331152896";
         const voice_channel = message.member.voice.channel;
+        lastMemberPlayed = buildMemberName(message.author.id);
+        messageChannel = message.channel;
         // if (message.author.id == basa) return message.channel.send("Baso, zar stvarno mislis da bi ti dozvolili da pustas muziku lol");
         if (message.author.id == basa) {
             message.channel.send("Baso pazi sta radis");
@@ -89,9 +92,12 @@ const video_player = async (guild, song) => {
 
     //If no song is left in the server queue. Leave the voice channel and delete the key and value pair from the global queue.
     if (!song) {
-        song_queue.voice_channel.leave();
-        queue.delete(guild.id);
-        return;
+        messageChannel.send(`${lastMemberPlayed} imas 30 sekundi da pustis sledecu pesmu ili izlazim sa vojsa :)`);
+        setTimeout(() => {
+            song_queue.voice_channel.leave();
+            queue.delete(guild.id);
+            return;
+        }, 30000);
     }
     const stream = ytdl(song.url, { filter: 'audioonly' });
     song_queue.connection.play(stream, { seek: 0, volume: 0.5 })
@@ -111,7 +117,7 @@ const video_player = async (guild, song) => {
 
 const skip_song = (message, server_queue) => {
     if (!message.member.voice.channel) return message.channel.send('Moras biti u kanalu kako bi pokrenuo ovu komandu!');
-    if (server_queue.songs.length==1) {
+    if (server_queue.songs.length == 1) {
         return message.channel.send(`Nema vise pesama u redu 😔`);
     }
     try {
@@ -129,4 +135,7 @@ const stop_song = (message, server_queue) => {
     } catch (err) {
         console.log(err)
     }
+}
+const buildMemberName = (name) => {
+    return `<@${name}> `;
 }

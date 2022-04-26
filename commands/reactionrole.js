@@ -11,13 +11,15 @@ module.exports = {
         const amongRole = message.guild.roles.cache.find(role => role.name === "Among us gang");
         const lolRole = message.guild.roles.cache.find(role => role.name === "lol gang");
         const csRole = message.guild.roles.cache.find(role => role.name === "CS gang");
-      
+        const rocketRole = message.guild.roles.cache.find(role => role.name === "rocket league geng");
+
         const backyardEmoji = "🌝";
         const graveEmoji = "🌚";
-        const mcEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'steve');
-        const amongEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'amonglove');
-        const lolEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'aquacry');
-        const csEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'hratatata');
+        const mcEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'mc'); //mc
+        const amongEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'amongded'); //? amongded
+        const lolEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'lol');//lol
+        const csEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'cs'); //cs
+        const rocketLeagueEmoji = message.guild.emojis.cache.find(emoji => emoji.name === 'rocketleague');
 
         let embed = new Discord.MessageEmbed()
             .setColor("#e42643")
@@ -29,7 +31,8 @@ module.exports = {
             ${mcEmoji} - Minecraft\n
             ${amongEmoji} - Among us\n
             ${lolEmoji} - League of Legends\n
-            ${csEmoji} - Counter Strike
+            ${csEmoji} - Counter Strike\n
+            ${rocketLeagueEmoji} - Rocket League
             `);
 
         let messageEmbed = await message.channel.send(embed);
@@ -39,6 +42,7 @@ module.exports = {
         messageEmbed.react(amongEmoji);
         messageEmbed.react(lolEmoji);
         messageEmbed.react(csEmoji);
+        messageEmbed.react(rocketLeagueEmoji);
 
         bot.on("messageReactionAdd", async (reaction, user) => {            //ko god reaguje na ovo ulazi u ovaj event
             if (reaction.message.partial) await reaction.message.fetch();
@@ -72,6 +76,9 @@ module.exports = {
                 if (reaction.emoji.id === csEmoji.id) {
                     await reaction.message.guild.members.cache.get(user.id).roles.add(csRole);
                 }
+                if (reaction.emoji.id === rocketLeagueEmoji.id) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.add(rocketRole);
+                }
             } else {
                 return;
             }
@@ -102,6 +109,9 @@ module.exports = {
                 }
                 if (reaction.emoji.id === csEmoji.id) {
                     await reaction.message.guild.members.cache.get(user.id).roles.remove(csRole);
+                }
+                if (reaction.emoji.id === rocketLeagueEmoji.id) {
+                    await reaction.message.guild.members.cache.get(user.id).roles.remove(rocketRole);
                 }
             } else {
                 return;
