@@ -94,10 +94,12 @@ const video_player = async (guild, song) => {
     if (!song) {
         messageChannel.send(`${lastMemberPlayed} imas 30 sekundi da pustis sledecu pesmu ili izlazim sa vojsa :)`);
         setTimeout(() => {
-            song_queue.voice_channel.leave();
-            queue.delete(guild.id);
-            return;
+            if (!queue_constructor.songs) {
+                song_queue.voice_channel.leave();
+                queue.delete(guild.id);
+            }
         }, 30000);
+        return;
     }
     const stream = ytdl(song.url, { filter: 'audioonly' });
     song_queue.connection.play(stream, { seek: 0, volume: 0.5 })
