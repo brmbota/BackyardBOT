@@ -2,6 +2,12 @@ const ytdl = require("ytdl-core");
 const ytSearch = require("yt-search");
 let lastMemberPlayed = "";
 let messageChannel;
+const queue_constructor = {
+    voice_channel: voice_channel,
+    text_channel: message.channel,
+    connection: null,
+    songs: []
+}
 const queue = new Map();
 //queue(message.guild.id,queue_contructor object {voice channel, text channel,  connection, song[]});
 //-music play [link]
@@ -56,7 +62,7 @@ module.exports = {
             //If the server queue does not exist (which doesn't for the first video queued) then create a constructor to be added to our global queue.
             if (!server_queue) {
 
-                const queue_constructor = {
+                queue_constructor = {
                     voice_channel: voice_channel,
                     text_channel: message.channel,
                     connection: null,
@@ -94,7 +100,7 @@ const video_player = async (guild, song) => {
     if (!song) {
         messageChannel.send(`${lastMemberPlayed} imas 30 sekundi da pustis sledecu pesmu ili izlazim sa vojsa :)`);
         setTimeout(() => {
-            if (!queue_constructor.songs) {
+            if (queue_constructor.songs.length === 0) {
                 song_queue.voice_channel.leave();
                 queue.delete(guild.id);
             }
