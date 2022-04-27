@@ -2,7 +2,7 @@ const ytdl = require("ytdl-core");
 const ytSearch = require("yt-search");
 let lastMemberPlayed = "";
 let messageChannel;
-const queue_constructor = {}
+let queue_constructor = {}
 const queue = new Map();
 //queue(message.guild.id,queue_contructor object {voice channel, text channel,  connection, song[]});
 //-music play [link]
